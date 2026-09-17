@@ -116,6 +116,13 @@
             margin-top: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
+        #loading-msg {
+            display: none;
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -129,7 +136,6 @@
             <!-- Título UNIVIVE en mayúsculas y cursivas -->
             <h1><i>UNIVIVE</i></h1>
             <div class="subtitulo">Conecta, estudia y vive</div>
-            <p style="font-weight: bold; font-size: 0.9em; color: #444;">
         </div>
         
         <form id="encuestaForm">
@@ -261,7 +267,8 @@
                 </select>
             </div>
 
-            <button type="submit">Enviar Respuestas</button>
+            <button type="submit" id="btnEnviar">Enviar Respuestas</button>
+            <div id="loading-msg">Guardando respuesta en la nube...</div>
         </form>
 
         <button class="nav-btn" onclick="cambiarVista('resultados')">Ver Panel de Resultados</button>
@@ -275,29 +282,29 @@
         <br><br>
         <button class="nav-btn" onclick="regresarEncuesta()" style="max-width: 250px; margin: auto;">Contestar otra vez</button>
         <br>
-        <button class="btn" onclick="cambiarVista('resultados')" style="max-width: 250px; margin: 10px auto; background-color: #8e44ad;">Ver Resultados</button>
+        <button class="btn" onclick="cambiarVista('resultados')" style="max-width: 250px; margin: 10px auto; background-color: #8e44ad; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer;">Ver Resultados</button>
     </div>
 
     <!-- Vista del Panel de Resultados -->
     <div id="vista-resultados" class="hidden">
         <h2>Panel de Estadísticas y Avance</h2>
         <div class="stats-box" id="resumenGeneral">
-            <!-- Se cargará mediante JavaScript -->
+            <p>Cargando datos desde Google Sheets...</p>
         </div>
         <button class="nav-btn" onclick="cambiarVista('formulario')">Regresar a la Encuesta</button>
     </div>
 </div>
 
 <script>
-    // Inicializar base de datos local limpia si no existe
-    if (!localStorage.getItem('respuestas_univive_v2')) {
-        localStorage.setItem('respuestas_univive_v2', JSON.stringify([]));
-    }
+    // ⚠️ CAMBIA ESTE ENLACE POR TU URL REAL DE SHEETDB ⚠️
+    const SHEET_DB_URL = 'https://sheetdb.io/api/v1/28knmvqq624dv';
 
     document.getElementById('encuestaForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // 1. Recolectamos los datos de los selects
+        document.getElementById('btnEnviar').style.display = 'none';
+        document.getElementById('loading-msg').style.display = 'block';
+
         const nuevaRespuesta = {
             p1: document.querySelector('select[name="p1"]').value,
             p2: document.querySelector('select[name="p2"]').value,
@@ -313,32 +320,29 @@
             fecha: new Date().toLocaleString()
         };
 
-        // 2. Estructura que exige SheetDB (dentro de un objeto "data" como un array)
-        const datosParaSheetDB = {
-            data: [nuevaRespuesta]
-        };
-
-        // 3. Petición POST a tu endpoint de SheetDB
-        fetch('https://sheetdb.io/api/v1/28knmvqq624dv', {
+        // Enviar a Google Sheets a través de SheetDB
+        fetch(SHEET_DB_URL, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(datosParaSheetDB)
+            body: JSON.stringify({ data: [nuevaRespuesta] })
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Guardado en SheetDB con éxito:', data);
-            
-            // Limpiar formulario y cambiar a la pantalla de agradecimiento con el perrito
             document.getElementById('encuestaForm').reset();
+            document.getElementById('btnEnviar').style.display = 'block';
+            document.getElementById('loading-msg').style.display = 'none';
+            
+            // Mostrar pantalla de agradecimiento con el perrito
             document.getElementById('vista-formulario').classList.add('hidden');
             document.getElementById('vista-gracias').classList.remove('hidden');
         })
-        .catch((error) => {
-            console.error('Error al guardar en SheetDB:', error);
-            alert('Hubo un error al enviar tus respuestas. Por favor, intenta de nuevo.');
+        .catch(error => {
+            alert('Hubo un error al guardar la respuesta. Revisa tu conexión.');
+            document.getElementById('btnEnviar').style.display = 'block';
+            document.getElementById('loading-msg').style.display = 'none';
         });
     });
 
@@ -361,74 +365,82 @@
     }
 
     function calcularEstadisticas() {
-        // Lee correctamente la nueva base de datos limpia
-        let respuestas = JSON.parse(localStorage.getItem('respuestas_univive_v2'));
-        let total = respuestas.length;
-        let metaGlobal = 800;
+        document.getElementById('resumenGeneral').innerHTML = '<p>Calculando estadísticas desde Google Sheets...</p>';
 
-        let porIntegrante = {
-            "Vanessa": 0, "Joselin": 0, "Felipe": 0, "Alexis": 0,
-            "Daniela": 0, "Abigail": 0, "Leonel": 0, "Fernanda": 0
-        };
+        // Consultar directamente los datos que están guardados en Google Sheets
+        fetch(SHEET_DB_URL)
+        .then(response => response.json())
+        .then(respuestas => {
+            let total = respuestas.length;
+            let metaGlobal = 800;
 
-        let conteos = {
-            p1: {}, p2: {}, p3: {}, p4: {}, p5: {},
-            p6: {}, p7: {}, p8: {}, p9: {}, p10: {}
-        };
+            let porIntegrante = {
+                "Vanessa": 0, "Joselin": 0, "Felipe": 0, "Alexis": 0,
+                "Daniela": 0, "Abigail": 0, "Leonel": 0, "Fernanda": 0
+            };
 
-        respuestas.forEach(r => {
-            if (porIntegrante[r.integrante] !== undefined) {
-                porIntegrante[r.integrante]++;
-            }
-            for (let i = 1; i <= 10; i++) {
-                let val = r['p' + i];
-                if (val) {
-                    conteos['p' + i][val] = (conteos['p' + i][val] || 0) + 1;
+            let conteos = {
+                p1: {}, p2: {}, p3: {}, p4: {}, p5: {},
+                p6: {}, p7: {}, p8: {}, p9: {}, p10: {}
+            };
+
+            respuestas.forEach(r => {
+                if (porIntegrante[r.integrante] !== undefined) {
+                    porIntegrante[r.integrante]++;
                 }
-            }
-        });
+                for (let i = 1; i <= 10; i++) {
+                    let val = r['p' + i];
+                    if (val) {
+                        conteos['p' + i][val] = (conteos['p' + i][val] || 0) + 1;
+                    }
+                }
+            });
 
-        let preguntasNombres = {
-            p1: "1. Género",
-            p2: "2. Edad",
-            p3: "3. Tiempo a la escuela",
-            p4: "4. Medio de transporte",
-            p5: "5. Estado civil",
-            p6: "6. ¿Tienes hijos?",
-            p7: "7. ¿A qué te dedicas?",
-            p8: "8. ¿Qué buscas en un departamento?",
-            p9: "9. Rango de precio renta",
-            p10: "10. Beneficios extras"
-        };
+            let preguntasNombres = {
+                p1: "1. Género",
+                p2: "2. Edad",
+                p3: "3. Tiempo a la escuela",
+                p4: "4. Medio de transporte",
+                p5: "5. Estado civil",
+                p6: "6. ¿Tienes hijos?",
+                p7: "7. ¿A qué te dedicas?",
+                p8: "8. ¿Qué buscas en un departamento?",
+                p9: "9. Rango de precio renta",
+                p10: "10. Beneficios extras"
+            };
 
-        let html = `<h3>Progreso Total: ${total} / ${metaGlobal} respuestas</h3>`;
-        
-        html += `<h4>Avance Individual por Integrante:</h4><ul>`;
-        for (let integ in porIntegrante) {
-            let porcentajeInteg = ((porIntegrante[integ] / 100) * 100).toFixed(0);
-            html += `<li><strong>${integ}:</strong> ${porIntegrante[integ]} / 100 respuestas (${porcentajeInteg}%)</li>`;
-        }
-        html += `</ul><hr>`;
-
-        html += `<h4>Resultados y Porcentajes por Pregunta:</h4>`;
-        
-        for (let i = 1; i <= 10; i++) {
-            let key = 'p' + i;
-            html += `<div style="margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 5px;">`;
-            html += `<strong>${preguntasNombres[key]}</strong><ul>`;
+            let html = `<h3>Progreso Total: ${total} / ${metaGlobal} respuestas</h3>`;
             
-            let opciones = conteos[key];
-            let totalPregunta = Object.values(opciones).reduce((a, b) => a + b, 0);
-
-            for (let op in opciones) {
-                let votos = opciones[op];
-                let porcentaje = totalPregunta > 0 ? ((votos / totalPregunta) * 100).toFixed(1) : 0;
-                html += `<li>${op}: ${votos} votos (${porcentaje}%)</li>`;
+            html += `<h4>Avance Individual por Integrante:</h4><ul>`;
+            for (let integ in porIntegrante) {
+                let porcentajeInteg = ((porIntegrante[integ] / 100) * 100).toFixed(0);
+                html += `<li><strong>${integ}:</strong> ${porIntegrante[integ]} / 100 respuestas (${porcentajeInteg}%)</li>`;
             }
-            html += `</ul></div>`;
-        }
+            html += `</ul><hr>`;
 
-        document.getElementById('resumenGeneral').innerHTML = html;
+            html += `<h4>Resultados y Porcentajes por Pregunta:</h4>`;
+            
+            for (let i = 1; i <= 10; i++) {
+                let key = 'p' + i;
+                html += `<div style="margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 5px;">`;
+                html += `<strong>${preguntasNombres[key]}</strong><ul>`;
+                
+                let opciones = conteos[key];
+                let totalPregunta = Object.values(opciones).reduce((a, b) => a + b, 0);
+
+                for (let op in opciones) {
+                    let votos = opciones[op];
+                    let porcentaje = totalPregunta > 0 ? ((votos / totalPregunta) * 100).toFixed(1) : 0;
+                    html += `<li>${op}: ${votos} votos (${porcentaje}%)</li>`;
+                }
+                html += `</ul></div>`;
+            }
+
+            document.getElementById('resumenGeneral').innerHTML = html;
+        })
+        .catch(error => {
+            document.getElementById('resumenGeneral').innerHTML = '<p style="color: red;">Error al cargar las estadísticas desde Google Sheets.</p>';
+        });
     }
 </script>
 

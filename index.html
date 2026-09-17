@@ -7,7 +7,7 @@
     <style>
         body { 
             font-family: Arial, sans-serif; 
-            background-color: #e6067a; /* Fondo rosa */
+            background-color: #ffc0cb; /* Fondo rosa */
             color: #333; 
             margin: 0; 
             padding: 20px; 
@@ -35,7 +35,7 @@
         }
         /* Título en mayúsculas y cursivas */
         h1 { 
-            color: hwb(264 3% 35%); 
+            color: #d63031; 
             text-align: center; 
             font-size: 2.2em;
             font-style: italic;
@@ -44,17 +44,17 @@
         .subtitulo {
             text-align: center;
             font-weight: bold;
-            color: hsla(0, 42%, 5%, 0.89);
+            color: #555;
             margin-bottom: 5px;
         }
         h2 { 
-            color: hwb(204 2% 71%); 
+            color: #2980b9; 
             text-align: center; 
         }
         /* Sección de preguntas en azul */
         .question-box { 
             background-color: #e3f2fd; 
-            border: 2px solid hsl(207, 91%, 51%); 
+            border: 2px solid #90caf9; 
             padding: 15px; 
             border-radius: 8px; 
             margin-bottom: 15px; 
@@ -63,7 +63,7 @@
             display: block; 
             font-weight: bold; 
             margin-bottom: 8px; 
-            color: hsl(212, 90%, 16%); 
+            color: #1565c0; 
         }
         select { 
             width: 100%; 
@@ -96,11 +96,11 @@
         }
         .hidden { display: none; }
         .nav-btn { 
-            background-color: hsl(204, 86%, 20%); 
+            background-color: #3498db; 
             margin-top: 10px; 
         }
         .nav-btn:hover { 
-            background-color: hwb(204 5% 52%); 
+            background-color: #2980b9; 
         }
         /* Estilo para la pantalla de agradecimiento con la imagen recortada */
         #vista-gracias {
@@ -124,12 +124,12 @@
     <!-- Vista del Formulario de Encuesta -->
     <div id="vista-formulario">
         <div class="header-content">
-            <!-- Logotipo circular (.jpeg) -->
+            <!-- Logotipo circular -->
             <img src="logo.jpeg" alt="Logotipo Univive" class="logo-circulo">
             <!-- Título UNIVIVE en mayúsculas y cursivas -->
             <h1><i>UNIVIVE</i></h1>
             <div class="subtitulo">Conecta, estudia y vive</div>
-            <p style="font-weight: bold; font-size: 0.9em; color: #444;">
+            <p style="font-weight: bold; font-size: 0.9em; color: #444;">Meta global: 800 respuestas (100 por cada uno de los 8 integrantes) • Cierre: Domingo</p>
         </div>
         
         <form id="encuestaForm">
@@ -138,9 +138,9 @@
                 <label>1. ¿A qué género perteneces?</label>
                 <select name="p1" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Hombre">a) Hombre</option>
-                    <option value="b) Mujer">b) Mujer</option>
-                    <option value="c) Prefiero no decirlo">c) Prefiero no decirlo</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
                 </select>
             </div>
 
@@ -149,9 +149,9 @@
                 <label>2. ¿Cuál es tu edad?</label>
                 <select name="p2" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Menor de edad">a) Menor de edad</option>
-                    <option value="b) 18 a 26 años">b) 18 a 26 años</option>
-                    <option value="c) Más de 26 años">c) Más de 26 años</option>
+                    <option value="Menor de edad">Menor de edad</option>
+                    <option value="18 a 26 años">18 a 26 años</option>
+                    <option value="Más de 26 años">Más de 26 años</option>
                 </select>
             </div>
 
@@ -160,9 +160,9 @@
                 <label>3. ¿Cuánto tardas en llegar a la escuela?</label>
                 <select name="p3" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Menos de 30 min">a) Menos de 30 min</option>
-                    <option value="b) 1 - 2 hrs">b) 1 - 2 hrs</option>
-                    <option value="c) 2 - 3 hrs">c) 2 - 3 hrs</option>
+                    <option value="Menos de 30 min">Menos de 30 min</option>
+                    <option value="1 - 2 hrs">1 - 2 hrs</option>
+                    <option value="2 - 3 hrs">2 - 3 hrs</option>
                 </select>
             </div>
 
@@ -171,9 +171,9 @@
                 <label>4. ¿Qué medio de transporte utilizas?</label>
                 <select name="p4" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Transporte público">a) Transporte público</option>
-                    <option value="b) Particular">b) Particular</option>
-                    <option value="c) Otro">c) Otro</option>
+                    <option value="Transporte público">Transporte público</option>
+                    <option value="Particular">Particular</option>
+                    <option value="Otro">Otro</option>
                 </select>
             </div>
 
@@ -182,10 +182,10 @@
                 <label>5. Estado civil</label>
                 <select name="p5" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Soltero/a">a) Soltero/a</option>
-                    <option value="b) Casado/a">b) Casado/a</option>
-                    <option value="c) Viudo/a">c) Viudo/a</option>
-                    <option value="d) Divorciado/a">d) Divorciado/a</option>
+                    <option value="Soltero">Soltero/a</option>
+                    <option value="Casado">Casado/a</option>
+                    <option value="Viudo">Viudo/a</option>
+                    <option value="Divorciado">Divorciado/a</option>
                 </select>
             </div>
 
@@ -194,8 +194,8 @@
                 <label>6. ¿Tienes hijos?</label>
                 <select name="p6" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Sí">a) Sí</option>
-                    <option value="b) No">b) No</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
                 </select>
             </div>
 
@@ -204,9 +204,9 @@
                 <label>7. ¿A qué te dedicas?</label>
                 <select name="p7" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Estudiante">a) Estudiante</option>
-                    <option value="b) Trabajar">b) Trabajar</option>
-                    <option value="c) Estudiar y trabajar">c) Estudiar y trabajar</option>
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Trabajar">Trabajar</option>
+                    <option value="Estudiar y trabajar">Estudiar y trabajar</option>
                 </select>
             </div>
 
@@ -215,10 +215,10 @@
                 <label>8. ¿Qué buscas en un departamento?</label>
                 <select name="p8" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Comodidad">a) Comodidad</option>
-                    <option value="b) Gente nueva que conocer">b) Gente nueva que conocer</option>
-                    <option value="c) Un lugar tranquilo donde estudiar">c) Un lugar tranquilo donde estudiar</option>
-                    <option value="d) Renta accesible">d) Renta accesible</option>
+                    <option value="Comodidad">Comodidad</option>
+                    <option value="Gente nueva que conocer">Gente nueva que conocer</option>
+                    <option value="Un lugar tranquilo donde estudiar">Un lugar tranquilo donde estudiar</option>
+                    <option value="Renta accesible">Renta accesible</option>
                 </select>
             </div>
 
@@ -227,10 +227,10 @@
                 <label>9. ¿Qué rango de precio pagarías por renta?</label>
                 <select name="p9" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) $3,000">a) $3,000</option>
-                    <option value="b) $5,000">b) $5,000</option>
-                    <option value="c) $7,000">c) $7,000</option>
-                    <option value="d) $10,000">d) $10,000</option>
+                    <option value="$3,000">$3,000</option>
+                    <option value="$5,000">$5,000</option>
+                    <option value="$7,000">$7,000</option>
+                    <option value="$10,000">$10,000</option>
                 </select>
             </div>
 
@@ -239,16 +239,16 @@
                 <label>10. ¿Qué beneficios extras te gustaría añadir a tu renta?</label>
                 <select name="p10" required>
                     <option value="">Selecciona una opción</option>
-                    <option value="a) Wifi">a) Wifi</option>
-                    <option value="b) Estacionamiento">b) Estacionamiento</option>
-                    <option value="c) TV por cable">c) TV por cable</option>
+                    <option value="Wifi">Wifi</option>
+                    <option value="Estacionamiento">Estacionamiento</option>
+                    <option value="TV por cable">TV por cable</option>
                 </select>
             </div>
 
-            <!-- Última pregunta: En representación de quién vienes -->
-            <div class="question-box" style="border-color: hsl(317, 78%, 47%); background-color: hwb(328 23% 8%);">
-                <label style="color: hwb(321 2% 60%);">¿En representación de quién vienes?</label>
-                <select name="integrante" required style="border-color: hsl(318, 89%, 49%);">
+            <!-- Última pregunta: ¿En representación de quién vienes? (Incisos a-h) -->
+            <div class="question-box" style="border-color: #d63031; background-color: #f8d7da;">
+                <label style="color: #c0392b;">¿En representación de quién vienes?</label>
+                <select name="integrante" required style="border-color: #d63031;">
                     <option value="">Selecciona un integrante</option>
                     <option value="Vanessa">a) Vanessa</option>
                     <option value="Joselin">b) Joselin</option>
@@ -264,7 +264,7 @@
             <button type="submit">Enviar Respuestas</button>
         </form>
 
-        <button class="nav-btn" onclick="cambiarVista('resultados')">Ver Panel de Resultados</button>
+        <button class="nav-btn" onclick="cambiarVista('resultados')">Ver Panel de Resultados y Avance Global</button>
     </div>
 
     <!-- Vista de Agradecimiento -->
@@ -289,9 +289,9 @@
 </div>
 
 <script>
-    // Inicializar base de datos local limpia si no existe
-    if (!localStorage.getItem('respuestas_univive_v2')) {
-        localStorage.setItem('respuestas_univive_v2', JSON.stringify([]));
+    // Inicializar base de datos local si no existe
+    if (!localStorage.getItem('respuestas_univive')) {
+        localStorage.setItem('respuestas_univive', JSON.stringify([]));
     }
 
     document.getElementById('encuestaForm').addEventListener('submit', function(e) {
@@ -312,9 +312,9 @@
             fecha: new Date().toLocaleString()
         };
 
-        let respuestas = JSON.parse(localStorage.getItem('respuestas_univive_v2'));
+        let respuestas = JSON.parse(localStorage.getItem('respuestas_univive'));
         respuestas.push(nuevaRespuesta);
-        localStorage.setItem('respuestas_univive_v2', JSON.stringify(respuestas));
+        localStorage.setItem('respuestas_univive', JSON.stringify(respuestas));
 
         document.getElementById('encuestaForm').reset();
         
@@ -342,16 +342,17 @@
     }
 
     function calcularEstadisticas() {
-        // Lee correctamente la nueva base de datos limpia
-        let respuestas = JSON.parse(localStorage.getItem('respuestas_univive_v2'));
+        let respuestas = JSON.parse(localStorage.getItem('respuestas_univive'));
         let total = respuestas.length;
         let metaGlobal = 800;
 
+        // Conteo individual por integrante (Meta: 100 c/u)
         let porIntegrante = {
             "Vanessa": 0, "Joselin": 0, "Felipe": 0, "Alexis": 0,
             "Daniela": 0, "Abigail": 0, "Leonel": 0, "Fernanda": 0
         };
 
+        // Contadores para cada pregunta
         let conteos = {
             p1: {}, p2: {}, p3: {}, p4: {}, p5: {},
             p6: {}, p7: {}, p8: {}, p9: {}, p10: {}
@@ -364,6 +365,7 @@
             for (let i = 1; i <= 10; i++) {
                 let val = r['p' + i];
                 if (val) {
+                    conteos['p'] = conteos['p'] || {};
                     conteos['p' + i][val] = (conteos['p' + i][val] || 0) + 1;
                 }
             }
@@ -383,8 +385,9 @@
         };
 
         let html = `<h3>Progreso Total: ${total} / ${metaGlobal} respuestas</h3>`;
+        html += `<p style="color: #c0392b; font-weight: bold;">⏰ Fecha de cierre: Este próximo domingo.</p>`;
         
-        html += `<h4>Avance Individual por Integrante:</h4><ul>`;
+        html += `<h4>Avance Individual por Integrante (Meta: 100 c/u):</h4><ul>`;
         for (let integ in porIntegrante) {
             let porcentajeInteg = ((porIntegrante[integ] / 100) * 100).toFixed(0);
             html += `<li><strong>${integ}:</strong> ${porIntegrante[integ]} / 100 respuestas (${porcentajeInteg}%)</li>`;
