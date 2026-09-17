@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIVIVE - Encuesta en Línea</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #e6067a; /* Fondo rosa */
+            color: #333; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 750px; 
+            margin: auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+        }
+        .header-content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Logotipo circular chico y bonito */
+        .logo-circulo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #d63031;
+            margin-bottom: 10px;
+        }
+        /* Título en mayúsculas y cursivas */
+        h1 { 
+            color: hwb(264 3% 35%); 
+            text-align: center; 
+            font-size: 2.2em;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        .subtitulo {
+            text-align: center;
+            font-weight: bold;
+            color: hsla(0, 42%, 5%, 0.89);
+            margin-bottom: 5px;
+        }
+        h2 { 
+            color: hwb(204 2% 71%); 
+            text-align: center; 
+        }
+        /* Sección de preguntas en azul */
+        .question-box { 
+            background-color: #e3f2fd; 
+            border: 2px solid hsl(207, 91%, 51%); 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+        }
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+            color: hsl(212, 90%, 16%); 
+        }
+        select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            background: white;
+        }
+        button { 
+            background-color: #e74c3c; 
+            color: white; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 16px; 
+            font-weight: bold;
+        }
+        button:hover { 
+            background-color: #c0392b; 
+        }
+        .stats-box { 
+            background: #fff; 
+            padding: 15px; 
+            border-radius: 6px; 
+            margin-top: 20px; 
+            border: 1px solid #ddd;
+        }
+        .hidden { display: none; }
+        .nav-btn { 
+            background-color: hsl(204, 86%, 20%); 
+            margin-top: 10px; 
+        }
+        .nav-btn:hover { 
+            background-color: hwb(204 5% 52%); 
+        }
+        /* Estilo para la pantalla de agradecimiento con la imagen recortada */
+        #vista-gracias {
+            text-align: center;
+            padding: 20px;
+        }
+        .perrito-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffc0cb;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Vista del Formulario de Encuesta -->
+    <div id="vista-formulario">
+        <div class="header-content">
+            <!-- Logotipo circular (.jpeg) -->
+            <img src="logo.jpeg" alt="Logotipo Univive" class="logo-circulo">
+            <!-- Título UNIVIVE en mayúsculas y cursivas -->
+            <h1><i>UNIVIVE</i></h1>
+            <div class="subtitulo">Conecta, estudia y vive</div>
+            <p style="font-weight: bold; font-size: 0.9em; color: #444;">
+        </div>
+        
+        <form id="encuestaForm">
+            <!-- Pregunta 1 -->
+            <div class="question-box">
+                <label>1. ¿A qué género perteneces?</label>
+                <select name="p1" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Hombre">a) Hombre</option>
+                    <option value="b) Mujer">b) Mujer</option>
+                    <option value="c) Prefiero no decirlo">c) Prefiero no decirlo</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="question-box">
+                <label>2. ¿Cuál es tu edad?</label>
+                <select name="p2" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Menor de edad">a) Menor de edad</option>
+                    <option value="b) 18 a 26 años">b) 18 a 26 años</option>
+                    <option value="c) Más de 26 años">c) Más de 26 años</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="question-box">
+                <label>3. ¿Cuánto tardas en llegar a la escuela?</label>
+                <select name="p3" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Menos de 30 min">a) Menos de 30 min</option>
+                    <option value="b) 1 - 2 hrs">b) 1 - 2 hrs</option>
+                    <option value="c) 2 - 3 hrs">c) 2 - 3 hrs</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="question-box">
+                <label>4. ¿Qué medio de transporte utilizas?</label>
+                <select name="p4" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Transporte público">a) Transporte público</option>
+                    <option value="b) Particular">b) Particular</option>
+                    <option value="c) Otro">c) Otro</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="question-box">
+                <label>5. Estado civil</label>
+                <select name="p5" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Soltero/a">a) Soltero/a</option>
+                    <option value="b) Casado/a">b) Casado/a</option>
+                    <option value="c) Viudo/a">c) Viudo/a</option>
+                    <option value="d) Divorciado/a">d) Divorciado/a</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 6 -->
+            <div class="question-box">
+                <label>6. ¿Tienes hijos?</label>
+                <select name="p6" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Sí">a) Sí</option>
+                    <option value="b) No">b) No</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 7 -->
+            <div class="question-box">
+                <label>7. ¿A qué te dedicas?</label>
+                <select name="p7" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Estudiante">a) Estudiante</option>
+                    <option value="b) Trabajar">b) Trabajar</option>
+                    <option value="c) Estudiar y trabajar">c) Estudiar y trabajar</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 8 -->
+            <div class="question-box">
+                <label>8. ¿Qué buscas en un departamento?</label>
+                <select name="p8" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Comodidad">a) Comodidad</option>
+                    <option value="b) Gente nueva que conocer">b) Gente nueva que conocer</option>
+                    <option value="c) Un lugar tranquilo donde estudiar">c) Un lugar tranquilo donde estudiar</option>
+                    <option value="d) Renta accesible">d) Renta accesible</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 9 -->
+            <div class="question-box">
+                <label>9. ¿Qué rango de precio pagarías por renta?</label>
+                <select name="p9" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) $3,000">a) $3,000</option>
+                    <option value="b) $5,000">b) $5,000</option>
+                    <option value="c) $7,000">c) $7,000</option>
+                    <option value="d) $10,000">d) $10,000</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 10 -->
+            <div class="question-box">
+                <label>10. ¿Qué beneficios extras te gustaría añadir a tu renta?</label>
+                <select name="p10" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="a) Wifi">a) Wifi</option>
+                    <option value="b) Estacionamiento">b) Estacionamiento</option>
+                    <option value="c) TV por cable">c) TV por cable</option>
+                </select>
+            </div>
+
+            <!-- Última pregunta: En representación de quién vienes -->
+            <div class="question-box" style="border-color: hsl(317, 78%, 47%); background-color: hwb(328 23% 8%);">
+                <label style="color: hwb(321 2% 60%);">¿En representación de quién vienes?</label>
+                <select name="integrante" required style="border-color: hsl(318, 89%, 49%);">
+                    <option value="">Selecciona un integrante</option>
+                    <option value="Vanessa">a) Vanessa</option>
+                    <option value="Joselin">b) Joselin</option>
+                    <option value="Felipe">c) Felipe</option>
+                    <option value="Alexis">d) Alexis</option>
+                    <option value="Daniela">e) Daniela</option>
+                    <option value="Abigail">f) Abigail</option>
+                    <option value="Leonel">g) Leonel</option>
+                    <option value="Fernanda">h) Fernanda</option>
+                </select>
+            </div>
+
+            <button type="submit">Enviar Respuestas</button>
+        </form>
+
+        <button class="nav-btn" onclick="cambiarVista('resultados')">Ver Panel de Resultados</button>
+    </div>
+
+    <!-- Vista de Agradecimiento -->
+    <div id="vista-gracias" class="hidden">
+        <h2 style="color: #27ae60; font-size: 2em;">¡Gracias por tu respuesta!</h2>
+        <p style="font-size: 1.1em; color: #555;">Tu opinión es muy importante para nuestro proyecto.</p>
+        <img src="perrito.png" alt="Gracias" class="perrito-img">
+        <br><br>
+        <button class="nav-btn" onclick="regresarEncuesta()" style="max-width: 250px; margin: auto;">Contestar otra vez</button>
+        <br>
+        <button class="btn" onclick="cambiarVista('resultados')" style="max-width: 250px; margin: 10px auto; background-color: #8e44ad;">Ver Resultados</button>
+    </div>
+
+    <!-- Vista del Panel de Resultados -->
+    <div id="vista-resultados" class="hidden">
+        <h2>Panel de Estadísticas y Avance</h2>
+        <div class="stats-box" id="resumenGeneral">
+            <!-- Se cargará mediante JavaScript -->
+        </div>
+        <button class="nav-btn" onclick="cambiarVista('formulario')">Regresar a la Encuesta</button>
+    </div>
+</div>
+
+<script>
+    // Inicializar base de datos local limpia si no existe
+    if (!localStorage.getItem('respuestas_univive_v2')) {
+        localStorage.setItem('respuestas_univive_v2', JSON.stringify([]));
+    }
+
+    document.getElementById('encuestaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // 1. Recolectamos los datos de los selects
+        const nuevaRespuesta = {
+            p1: document.querySelector('select[name="p1"]').value,
+            p2: document.querySelector('select[name="p2"]').value,
+            p3: document.querySelector('select[name="p3"]').value,
+            p4: document.querySelector('select[name="p4"]').value,
+            p5: document.querySelector('select[name="p5"]').value,
+            p6: document.querySelector('select[name="p6"]').value,
+            p7: document.querySelector('select[name="p7"]').value,
+            p8: document.querySelector('select[name="p8"]').value,
+            p9: document.querySelector('select[name="p9"]').value,
+            p10: document.querySelector('select[name="p10"]').value,
+            integrante: document.querySelector('select[name="integrante"]').value,
+            fecha: new Date().toLocaleString()
+        };
+
+        // 2. Estructura que exige SheetDB (dentro de un objeto "data" como un array)
+        const datosParaSheetDB = {
+            data: [nuevaRespuesta]
+        };
+
+        // 3. Petición POST a tu endpoint de SheetDB
+        fetch('https://sheetdb.io/api/v1/28knmvqq624dv', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosParaSheetDB)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Guardado en SheetDB con éxito:', data);
+            
+            // Limpiar formulario y cambiar a la pantalla de agradecimiento con el perrito
+            document.getElementById('encuestaForm').reset();
+            document.getElementById('vista-formulario').classList.add('hidden');
+            document.getElementById('vista-gracias').classList.remove('hidden');
+        })
+        .catch((error) => {
+            console.error('Error al guardar en SheetDB:', error);
+            alert('Hubo un error al enviar tus respuestas. Por favor, intenta de nuevo.');
+        });
+    });
+
+    function cambiarVista(vista) {
+        document.getElementById('vista-formulario').classList.add('hidden');
+        document.getElementById('vista-gracias').classList.add('hidden');
+        document.getElementById('vista-resultados').classList.add('hidden');
+
+        if (vista === 'resultados') {
+            document.getElementById('vista-resultados').classList.remove('hidden');
+            calcularEstadisticas();
+        } else if (vista === 'formulario') {
+            document.getElementById('vista-formulario').classList.remove('hidden');
+        }
+    }
+
+    function regresarEncuesta() {
+        document.getElementById('vista-gracias').classList.add('hidden');
+        document.getElementById('vista-formulario').classList.remove('hidden');
+    }
+
+    function calcularEstadisticas() {
+        // Lee correctamente la nueva base de datos limpia
+        let respuestas = JSON.parse(localStorage.getItem('respuestas_univive_v2'));
+        let total = respuestas.length;
+        let metaGlobal = 800;
+
+        let porIntegrante = {
+            "Vanessa": 0, "Joselin": 0, "Felipe": 0, "Alexis": 0,
+            "Daniela": 0, "Abigail": 0, "Leonel": 0, "Fernanda": 0
+        };
+
+        let conteos = {
+            p1: {}, p2: {}, p3: {}, p4: {}, p5: {},
+            p6: {}, p7: {}, p8: {}, p9: {}, p10: {}
+        };
+
+        respuestas.forEach(r => {
+            if (porIntegrante[r.integrante] !== undefined) {
+                porIntegrante[r.integrante]++;
+            }
+            for (let i = 1; i <= 10; i++) {
+                let val = r['p' + i];
+                if (val) {
+                    conteos['p' + i][val] = (conteos['p' + i][val] || 0) + 1;
+                }
+            }
+        });
+
+        let preguntasNombres = {
+            p1: "1. Género",
+            p2: "2. Edad",
+            p3: "3. Tiempo a la escuela",
+            p4: "4. Medio de transporte",
+            p5: "5. Estado civil",
+            p6: "6. ¿Tienes hijos?",
+            p7: "7. ¿A qué te dedicas?",
+            p8: "8. ¿Qué buscas en un departamento?",
+            p9: "9. Rango de precio renta",
+            p10: "10. Beneficios extras"
+        };
+
+        let html = `<h3>Progreso Total: ${total} / ${metaGlobal} respuestas</h3>`;
+        
+        html += `<h4>Avance Individual por Integrante:</h4><ul>`;
+        for (let integ in porIntegrante) {
+            let porcentajeInteg = ((porIntegrante[integ] / 100) * 100).toFixed(0);
+            html += `<li><strong>${integ}:</strong> ${porIntegrante[integ]} / 100 respuestas (${porcentajeInteg}%)</li>`;
+        }
+        html += `</ul><hr>`;
+
+        html += `<h4>Resultados y Porcentajes por Pregunta:</h4>`;
+        
+        for (let i = 1; i <= 10; i++) {
+            let key = 'p' + i;
+            html += `<div style="margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 5px;">`;
+            html += `<strong>${preguntasNombres[key]}</strong><ul>`;
+            
+            let opciones = conteos[key];
+            let totalPregunta = Object.values(opciones).reduce((a, b) => a + b, 0);
+
+            for (let op in opciones) {
+                let votos = opciones[op];
+                let porcentaje = totalPregunta > 0 ? ((votos / totalPregunta) * 100).toFixed(1) : 0;
+                html += `<li>${op}: ${votos} votos (${porcentaje}%)</li>`;
+            }
+            html += `</ul></div>`;
+        }
+
+        document.getElementById('resumenGeneral').innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
