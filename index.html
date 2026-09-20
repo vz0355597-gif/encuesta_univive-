@@ -320,17 +320,16 @@
             fecha: new Date().toLocaleString()
         };
 
-        // Enviar a Google Sheets a través de SheetDB
+        // Enviar a Google Apps Script de forma segura
         fetch(SHEET_DB_URL, {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ data: [nuevaRespuesta] })
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(() => {
             document.getElementById('encuestaForm').reset();
             document.getElementById('btnEnviar').style.display = 'block';
             document.getElementById('loading-msg').style.display = 'none';
@@ -411,10 +410,12 @@
 
             let html = `<h3>Progreso Total: ${total} / ${metaGlobal} respuestas</h3>`;
             
-            html += `<h4>Avance Individual por Integrante:</h4><ul>`;
+            html += `<h4>Avance Individual por Integrante (Meta: 100 c/u):</h4><ul>`;
             for (let integ in porIntegrante) {
-                let porcentajeInteg = ((porIntegrante[integ] / 100) * 100).toFixed(0);
-                html += `<li><strong>${integ}:</strong> ${porIntegrante[integ]} / 100 respuestas (${porcentajeInteg}%)</li>`;
+                let metaIndividual = 100;
+                let cant = porIntegrante[integ];
+                let porcentajeInteg = ((cant / metaIndividual) * 100).toFixed(0);
+                html += `<li><strong>${integ}:</strong> ${cant} / ${metaIndividual} respuestas (${porcentajeInteg}%)</li>`;
             }
             html += `</ul><hr>`;
 
