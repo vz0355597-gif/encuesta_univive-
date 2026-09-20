@@ -367,7 +367,7 @@
         document.getElementById('resumenGeneral').innerHTML = '<p>Calculando estadísticas desde Google Sheets...</p>';
 
         // Consultar directamente los datos que están guardados en Google Sheets
-        fetch(SHEET_DB_URL)
+        fetch(SHEET_DB_URL + "?t=" + new Date().getTime())
         .then(response => response.json())
         .then(respuestas => {
             let total = respuestas.length;
